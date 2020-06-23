@@ -11,10 +11,10 @@ let refreshTokens = []
 
 router.post('/register', (req, res) => {
     const userData = {
-        role_id: req.body.role_id,
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        role_id: 2
     }
     models.user.findOne({
         where: {
@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
             })
         }
         else {
-            res.send("User already exist")
+            res.status(409).send("User already exist")
         }
     }).catch(err => {
         res.status(400).send({error: err})
