@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
             })
         }
         else {
-            res.status(409).send("User already exist")
+            res.status(409).set('Content-Type', 'application/json').send({ message : 'User already exist' })
         }
     }).catch(err => {
         res.status(400).send({error: err})
