@@ -53,7 +53,6 @@ router.post('/login', (req, res) => {
         if(user) {
             const data = {
                 id: user.dataValues.id,
-                role_id: user.role.dataValues.id,
                 role_name: user.role.dataValues.name,
                 name: user.dataValues.name,
                 email: user.dataValues.email
