@@ -1,15 +1,15 @@
 # api-todos-example
-Un ejemplo de API REST hecho en NodeJS junto con el framework Express. Implementa el uso de JWT para autenticación y autorización, ORM para las consultas a la base de datos y el uso de Docker a modo de desarrollo
+Un ejemplo de API REST hecho en NodeJS junto con el framework Express. Implementa el uso de JWT para autenticación y autorización, ORM para las consultas a la base de datos y el uso de Docker
 ## Instrucciones de instalación
-Esta API se desarrolló bajo NodeJS v12.16.2 y NPM v6.14.4. Se recomienda usar base de datos MySQL aunque no deberia tener problemas con otro motor de base de datos siemrpe y cuando se instalen las dependencias requeridas. Se incluye un docker-compose para levantar los contenedores de MySQL y el gestor de base de datos Adminer
+Esta API se desarrolló bajo NodeJS v12.16.2 y NPM v6.14.4. Se recomienda usar base de datos MySQL aunque no deberia tener problemas con otro motor de base de datos siempre  y cuando se instalen las dependencias requeridas. Se incluye un docker-compose por si quiere levantar el servidor, MySQL y Adminer en contenedores
 ### Dependencias
 Este proyecto hace uso de las siguientes dependencias
 + Express v4.17.1
-+ Sequelize v5.21.12
++ Sequelize v5.22.3
 + MySQL v2.18.1
 + MySQL2 v2.1.0
 + JSON Web Token v8.5.1
-+ Bcrypt v4.0.1
++ Bcrypt v5.0.0
 + Dotenv v8.2.0
 + CORS v2.8.5
 
@@ -18,12 +18,15 @@ Para desarrollo se incluyen las siguientes dependencias
 + Nodemon v2.0.4
 ### Instalación
 + Clonar proyecto
-+ Ejecutar npm i
-+ Crear base de datos y modificar el archivo .env con las credenciales de acceso, dirección y nombre de la base de datos
-+ Correr el proyecto con npm run dev
-+ Ejecutar npx sequelize db:migrate para ejecutar las migraciones
-+ Ejectar npx sequelize db:seed:all para ejecutar los seeder
-+ PROFIT
++ Copiar .env.example, renombrar a .env y modificar los parametros necesarios, si no quiere modificar la configuración a base de datos solo modifique JWT_SECRET_KEY y JWT_REFRESH_KEY
+#### Si va a hacer deploy con docker
++ Ejecute docker-compose up --build
++ Ejecute docer exec -it todos-api sh para entrar al contenedor y ejecute npm run sequelize-scripts
+#### Si va a hacer deploy sin docker
++ Edite el archivo .env apuntando a la direccion ip y credenciales de la base de datos.
++ Ejecute npm i
++ Ejecute npm run sequelize-scripts
++ Arranque el servidor con npm start, también puedes levantar el servidor con npm run dev del cual hará uso de nodemon
 ## Endpoints
 + POST /register: Registra un nuevo usuario
 + POST /login: Autentica un usuario, retorna un token de acceso y un token de refresco (por dejencto el token de acceso dura 15 segundos), el token de refresco queda guardado en un arreglo en memoria
