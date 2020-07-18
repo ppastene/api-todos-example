@@ -59,8 +59,8 @@ router.post('/login', (req, res) => {
                 email: user.dataValues.email
             }
             if (bcrypt.compareSync(req.body.password, user.password)) {
-                let accessToken = generateToken(data)
-                let refreshToken = jwt.sign(data, process.env.JWT_REFRESH_KEY)
+                let accessToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
+                let refreshToken = jwt.sign(data, process.env.JWT_REFRESH_KEY, { expiresIn: '1d' })
                 refreshTokens.push(refreshToken)
                 res.status(200).send({accessToken: accessToken, refreshToken: refreshToken})
             }
