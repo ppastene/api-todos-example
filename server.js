@@ -16,5 +16,5 @@ app.use('/todos', todos);
 
 app.listen(port, () => {
     console.log("Servidor operativo en puerto "+port)
-    db.sequelize.sync();
+    //db.sequelize.sync();
 })
